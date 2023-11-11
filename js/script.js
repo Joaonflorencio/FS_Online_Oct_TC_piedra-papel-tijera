@@ -1,43 +1,83 @@
-const opciones = ["Piedra", "Papel", "Tijera"];
-let puntosUsuario = 0;
-let puntosOrdenador = 0;
+const options = [0, 1, 2]
+const puntosUsuario = 0
+const puntosOrdenador = 0
 
-const botones = document.querySelectorAll('.boton-jugada');
-const resultados = document.getElementById('resultados');
-const contadorUsuario = document.getElementById('contador-usuario');
-const contadorOrdenador = document.getElementById('contador-ordenador');
+let botonPiedra = document.querySelectorAll(".botonjugada")[0]
+let botonPapel = document.querySelectorAll(".botonjugada")[1]
+let botonTijera = document.querySelectorAll(".botonjugada")[2]
+let contadorUsuario = document.getElementById("contador-usuario")
+let contadorOrdenador = document.getElementById("contador-ordenador")
+let resultados = document.getElementById("resultados")
+
+botonPiedra.addEventListener("click", function() {
+   jugarPiedra();
+   actualizarContador();
+});
+botonPapel.addEventListener("click", function() {
+   jugarPapel();
+   actualizarContador();
+});
+botonTijera.addEventListener("click", function() {
+   jugartijera();
+   actualizarContador();
+});
+
+    function jugarPiedra() {
+      contadorUsuario = 0;
+      contadorOrdenador = obtenerJugadaOrdenador();
+      obtenerResultado();
+  }
+  function jugarPapel() {
+   contadorUsuario = 1;
+   contadorOrdenador = obtenerJugadaOrdenador();
+   obtenerResultado();
+}
+function jugartijera() {
+   contadorUsuario = 2;
+   contadorOrdenador = obtenerJugadaOrdenador();
+   obtenerResultado();
+}
+
+   
+    function obtenerJugadaOrdenador() {
+      return Math.floor(Math.random() * 3)
+   }
 
 
-botones.forEach(boton => {
-    boton.addEventListener('click', () => {
-       const opcionUsuario = boton.dataset.boton-jugada;
-       const opcionOrdenador = opciones[Math.floor(Math.random() * opciones.length)];
-       obtenerResultado(opcionUsuario, opcionOrdenador);
-    });
-   });
-   
-   function obtenerResultado(opcionUsuario, opcionOrdenador) {
-    if (opcionUsuario === opcionOrdenador) {
-       return 'Empate';
-    }
-    if (
-       (opcionUsuario === 'Piedra' && opcionOrdenador === 'Tijera') ||
-       (opcionUsuario === 'Papel' && opcionOrdenador === 'Piedra') ||
-       (opcionUsuario === 'Tijera' && opcionOrdenador === 'Papel')
-    ) {
-       return 'Ganaste';
-    } else {
-       return 'Perdiste';
-    }
-   }
-   
-   function mostrarResultado(resultado) {
-    resultados.textContent = resultado;
-   }
-   
-   function actualizarPuntuacion(usuario, ordenador) {
-    puntosUsuario += usuario;
-    puntosOrdenador += ordenador;
-    contadorUsuario.textContent = puntosUsuario;
-    contadorOrdenador.textContent = puntosOrdenador;
-   }
+    function obtenerResultado () {
+    
+if ( contadorUsuario === contadorOrdenador 
+
+    ) {puntosUsuario= 0 ; puntosOrdenador=0}
+else if  (  
+   contadorUsuario=== 0 && contadorOrdenador ===1
+
+) {puntosOrdenador +=1}
+else if  (  
+   contadorUsuario=== 0 && contadorOrdenador ===2
+
+) {puntosUsuario +=1}
+else if  (  
+   contadorUsuario=== 1 && contadorOrdenador ===0
+
+) {puntosUsuario +=1}
+else if  (  
+   contadorUsuario=== 1 && contadorOrdenador ===2
+
+) {puntosOrdenador +=1}
+else if  (  
+   contadorUsuario=== 2 && contadorOrdenador ===0
+
+) {puntosOrdenador +=1}
+else if  (  
+   contadorUsuario=== 2 && contadorOrdenador ===1
+
+) {puntosUsuario +=1}
+}
+    
+
+function actualizarContador() {
+   contadorUsuario.textContent = puntosUsuario;
+   contadorOrdenador.textContent = puntosOrdenador;
+}
+
